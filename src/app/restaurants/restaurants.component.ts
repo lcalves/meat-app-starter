@@ -7,6 +7,7 @@ import { RestaurantsService } from './restaurants.service'
   selector: 'mt-restaurants',
   templateUrl: './restaurants.component.html'
 })
+
 export class RestaurantsComponent implements OnInit {
 
   restaurants: Restaurant[]
@@ -15,7 +16,7 @@ export class RestaurantsComponent implements OnInit {
 
   ngOnInit() {
 
-      this.restaurants = this.restaurantsService.restaurants()
+      this.restaurantsService.restaurants().subscribe(rest => this.restaurants = rest)
 
   }
 
