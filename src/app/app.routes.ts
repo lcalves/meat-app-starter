@@ -1,3 +1,4 @@
+import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
@@ -19,6 +20,7 @@ export const ROUTES: Routes = [
         children: [
             {path: '', redirectTo: 'menu', pathMatch: 'full'},
             {path: 'menu', component: MenuComponent},
+            {path: 'reviews', component: ReviewsComponent},
         ]
     },
     {path: 'order', loadChildren: './order/order.module#OrderModule'},
