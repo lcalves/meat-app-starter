@@ -1,37 +1,37 @@
+import { apiConfig } from './api-config';
 import { Request, Response } from "express";
-import {User, users} from './users'
+import { User, users } from './users'
+import * as jwt from 'jsonwebtoken'
 
 export const handleAuthentication = (req: Request, resp: Response) => {
 
-    if (req === null) {
-        
-        console.log("request null")
-    }
-
     const user: User = req.body
 
-console.log("log body req.body " +req.query)
-console.log("log body user" + user)
+    /*/new User(req.body['email'], "", req.body['password'])
+    
+        console.log("log body req.body ")
+        console.log("log body user" + user.email)
+    */
 
+    if (isValid(user)) {
 
-    if(isValid(user)){
-
-        const dbUser: User = users[user.email]
-        resp.json({name: dbUser.name, email: dbUser.email})
+        const dbUser = users[user.email]
+        const token = jwt.sign({ sub: dbUser.email, iss: 'meat-api' }, apiConfig.secret)
+        resp.json({ name: dbUser.name, email: dbUser.email, accessToken: token })
 
     } else {
 
-        resp.status(403).json({message: 'Dados inválidos.'})
+        resp.status(403).json({ message: 'Dados inválidos.' })
     }
-}
 
-function isValid(user: User) : boolean {
-    console.log("teste user " + user)
-    if(!user){
 
-        return false
+    function isValid(user: User): boolean {
+
+        if (!user) {
+            console.log("deu ruim " + user)
+            return false
+        }
+        const dbUser = users[user.email]
+        return dbUser !== undefined && dbUser.matches(user)
     }
-    const dbUser = user[user.email]
-    return dbUser !== undefined && dbUser.matches(user)
-
 }

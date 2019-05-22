@@ -2,11 +2,17 @@
 exports.__esModule = true;
 var auth_1 = require("./auth");
 var jsonServer = require("json-server");
+var authz_1 = require("./authz");
 var fs = require("fs");
 var https = require("https");
+var bodyParser = require("body-parser");
 var server = jsonServer.create();
 var router = jsonServer.router('db.json');
 var middlewares = jsonServer.defaults();
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({
+    extended: true
+}));
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
 // To handle POST, PUT and PATCH you need to use a body-parser
@@ -14,6 +20,7 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 //rota de login "middleware para login"
 server.post('/login', auth_1.handleAuthentication);
+server.use('/orders', authz_1.handleAuthorization);
 // Use default router
 server.use(router);
 var options = {

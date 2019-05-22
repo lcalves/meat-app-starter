@@ -1,26 +1,29 @@
 "use strict";
 exports.__esModule = true;
+var api_config_1 = require("./api-config");
 var users_1 = require("./users");
+var jwt = require("jsonwebtoken");
 exports.handleAuthentication = function (req, resp) {
-    if (req === null) {
-        console.log("request null");
-    }
     var user = req.body;
-    console.log("log body req.body " + req.query);
-    console.log("log body user" + user);
+    /*/new User(req.body['email'], "", req.body['password'])
+    
+        console.log("log body req.body ")
+        console.log("log body user" + user.email)
+    */
     if (isValid(user)) {
         var dbUser = users_1.users[user.email];
-        resp.json({ name: dbUser.name, email: dbUser.email });
+        var token = jwt.sign({ sub: dbUser.email, iss: 'meat-api' }, api_config_1.apiConfig.secret);
+        resp.json({ name: dbUser.name, email: dbUser.email, accessToken: token });
     }
     else {
         resp.status(403).json({ message: 'Dados inválidos.' });
     }
-};
-function isValid(user) {
-    console.log("teste user " + user);
-    if (!user) {
-        return false;
+    function isValid(user) {
+        if (!user) {
+            console.log("deu ruim " + user);
+            return false;
+        }
+        var dbUser = users_1.users[user.email];
+        return dbUser !== undefined && dbUser.matches(user);
     }
-    var dbUser = user[user.email];
-    return dbUser !== undefined && dbUser.matches(user);
-}
+};

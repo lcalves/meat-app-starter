@@ -1,15 +1,20 @@
 import { handleAuthentication } from './auth';
 import * as jsonServer from 'json-server'
 
-import {Express} from 'express'
-
+import {handleAuthorization} from './authz'
 
 import * as fs from 'fs'
 import * as https from 'https'
 
+const bodyParser = require("body-parser");
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
+
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
@@ -20,6 +25,8 @@ server.use(jsonServer.bodyParser)
 
 //rota de login "middleware para login"
 server.post('/login', handleAuthentication)
+
+server.use('/orders', handleAuthorization)
 
 // Use default router
 server.use(router)
