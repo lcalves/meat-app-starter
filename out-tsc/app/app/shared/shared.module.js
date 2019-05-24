@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotificationService } from './messages/notification.service';
+import { LoginService } from './../security/login/login.servide';
 var SharedModule = (function () {
     function SharedModule() {
     }
@@ -22,7 +23,7 @@ var SharedModule = (function () {
     SharedModule.forRoot = function () {
         return {
             ngModule: SharedModule_1,
-            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService]
+            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService, LoginService]
         };
     };
     SharedModule = SharedModule_1 = __decorate([
