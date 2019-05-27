@@ -4,6 +4,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import { LeaveOrderGuard } from './../order/leave-order.guard';
+import { LoggedInGuard } from './../security/loggedin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from './rating/rating.component';
 import { RadioComponent } from './../radio/radio.component';
@@ -23,7 +25,8 @@ var SharedModule = (function () {
     SharedModule.forRoot = function () {
         return {
             ngModule: SharedModule_1,
-            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService, LoginService]
+            providers: [ShoppingCartService, RestaurantsService, OrderService,
+                NotificationService, LoginService, LoggedInGuard, LeaveOrderGuard]
         };
     };
     SharedModule = SharedModule_1 = __decorate([

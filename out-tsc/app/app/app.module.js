@@ -24,6 +24,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './security/login/login.component';
+import { UserDetailComponent } from './header/user-detail/user-detail.component';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -42,7 +43,8 @@ var AppModule = (function () {
                 ReviewsComponent,
                 OrderSummaryComponent,
                 NotFoundComponent,
-                LoginComponent
+                LoginComponent,
+                UserDetailComponent
             ],
             imports: [
                 BrowserModule,

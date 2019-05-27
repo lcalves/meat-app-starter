@@ -1,6 +1,7 @@
-import { User } from './user.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from './../../shared/messages/notification.service';
 import { LoginService } from './login.servide';
-import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -12,8 +13,11 @@ export class LoginComponent implements OnInit {
 
 
   loginForm: FormGroup
+  navigateTo: string
 
-  constructor(private fb: FormBuilder,private loginService: LoginService) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService,
+    private notificationService: NotificationService, private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -22,11 +26,17 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required]),
 
     })
+    this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/')
   }
 
-  login(){
+  login() {
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
-                      .subscribe(user =>console.log(user) )
+      .subscribe(user => this.notificationService.notify(`Bem Vindo, ${user.name}`),
+        response => this.notificationService.notify(response.error.message),
+        ()=>{
+          this.router.navigate([atob(this.navigateTo)])
+        }
+      )
   }
 
 }
