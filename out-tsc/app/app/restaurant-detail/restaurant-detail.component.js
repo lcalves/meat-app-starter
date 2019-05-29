@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { RestaurantsService } from './../restaurants/restaurants.service';
 import { ActivatedRoute } from '@angular/router';
-var RestaurantDetailComponent = (function () {
+var RestaurantDetailComponent = /** @class */ (function () {
     function RestaurantDetailComponent(restauranteService, route) {
         this.restauranteService = restauranteService;
         this.route = route;

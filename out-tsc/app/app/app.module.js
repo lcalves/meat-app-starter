@@ -4,9 +4,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import { ApplicationErrorHandler } from './app.error-handler';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -25,7 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
-var AppModule = (function () {
+import { registerLocaleData } from '@angular/common';
+import locatePt from '@angular/common/locales/pt';
+registerLocaleData(locatePt, 'pt');
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -53,7 +57,8 @@ var AppModule = (function () {
                 SharedModule.forRoot(),
                 RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
             ],
-            providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+            providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' },
+                { provide: ErrorHandler, useClass: ApplicationErrorHandler }],
             bootstrap: [AppComponent]
         })
     ], AppModule);

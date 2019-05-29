@@ -18,7 +18,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/from';
 import { Observable } from 'rxjs/Observable';
-var RestaurantsComponent = (function () {
+var RestaurantsComponent = /** @class */ (function () {
     function RestaurantsComponent(restaurantsService, formBuilder) {
         this.restaurantsService = restaurantsService;
         this.formBuilder = formBuilder;

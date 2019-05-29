@@ -27,7 +27,7 @@ function extractToken(req: Request): string {
     if (req.headers && req.headers.authorization) {
         //Authorization: Bearer ZZZ.XXX.YYY
         console.log("Entrou no extract")
-        const parts: string[] = req.headers.authorization.split(' ')
+        const parts: string[] = req.headers.authorization.toString().split(' ')
         console.log(parts)
         if (parts.length === 2 && parts[0] === 'Bearer') {
             console.log("setando token")

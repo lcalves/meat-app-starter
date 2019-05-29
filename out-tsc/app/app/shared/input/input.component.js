@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, ContentChild } from '@angular/core';
 import { NgModel, FormControlName } from '@angular/forms';
-var InputComponent = (function () {
+var InputComponent = /** @class */ (function () {
     function InputComponent() {
         this.showTip = true;
     }

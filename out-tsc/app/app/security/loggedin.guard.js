@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { LoginService } from './login/login.servide';
 import { Injectable } from "@angular/core";
-var LoggedInGuard = (function () {
+var LoggedInGuard = /** @class */ (function () {
     function LoggedInGuard(loginService) {
         this.loginService = loginService;
     }

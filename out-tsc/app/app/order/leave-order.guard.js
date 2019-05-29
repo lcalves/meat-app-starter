@@ -1,4 +1,4 @@
-var LeaveOrderGuard = (function () {
+var LeaveOrderGuard = /** @class */ (function () {
     function LeaveOrderGuard() {
     }
     LeaveOrderGuard.prototype.canDeactivate = function (orderComponent, activatedRoute, routeState) {

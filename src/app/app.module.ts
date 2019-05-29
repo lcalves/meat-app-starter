@@ -22,6 +22,12 @@ import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component'
 
 
+import {registerLocaleData} from '@angular/common'
+import locatePt from '@angular/common/locales/pt'
+
+registerLocaleData(locatePt, 'pt')
+
+
 @NgModule({
   declarations: [
     AppComponent,

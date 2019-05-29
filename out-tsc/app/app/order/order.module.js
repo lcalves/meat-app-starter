@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 var ROUTES = [
     { path: '', component: OrderComponent, canDeactivate: [LeaveOrderGuard] }
 ];
-var OrderModule = (function () {
+var OrderModule = /** @class */ (function () {
     function OrderModule() {
     }
     OrderModule = __decorate([

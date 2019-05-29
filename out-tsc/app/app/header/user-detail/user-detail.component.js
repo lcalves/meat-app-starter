@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { LoginService } from './../../security/login/login.servide';
 import { Component } from '@angular/core';
-var UserDetailComponent = (function () {
+var UserDetailComponent = /** @class */ (function () {
     function UserDetailComponent(loginService) {
         this.loginService = loginService;
     }

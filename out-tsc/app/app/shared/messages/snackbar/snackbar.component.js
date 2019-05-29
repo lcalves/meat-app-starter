@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
-var SnackbarComponent = (function () {
+var SnackbarComponent = /** @class */ (function () {
     function SnackbarComponent(notificationService) {
         this.notificationService = notificationService;
         this.message = "Hello there!";

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input } from '@angular/core';
 import { animate, trigger, state, style, transition } from '@angular/animations';
-var RestaurantComponent = (function () {
+var RestaurantComponent = /** @class */ (function () {
     function RestaurantComponent() {
         this.restaurantState = 'ready';
     }

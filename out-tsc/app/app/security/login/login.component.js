@@ -12,7 +12,7 @@ import { NotificationService } from './../../shared/messages/notification.servic
 import { LoginService } from './login.servide';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-var LoginComponent = (function () {
+var LoginComponent = /** @class */ (function () {
     function LoginComponent(fb, loginService, notificationService, activatedRoute, router) {
         this.fb = fb;
         this.loginService = loginService;

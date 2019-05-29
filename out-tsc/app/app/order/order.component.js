@@ -11,9 +11,9 @@ import { Component } from '@angular/core';
 import { OrderService } from './order.service';
 import { OrderItem } from './order.model';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import 'rxjs/add/operator/do';
-var OrderComponent = (function () {
+var OrderComponent = /** @class */ (function () {
     function OrderComponent(orderService, router, formBuilder) {
         this.orderService = orderService;
         this.router = router;
@@ -29,15 +29,17 @@ var OrderComponent = (function () {
     }
     OrderComponent_1 = OrderComponent;
     OrderComponent.prototype.ngOnInit = function () {
-        this.orderForm = this.formBuilder.group({
-            name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+        this.orderForm = new FormGroup({
+            name: new FormControl('', {
+                validators: [Validators.required, Validators.minLength(5)]
+            }),
             email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
             emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
             address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
             number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
             optionalAddress: this.formBuilder.control(''),
             paymentOption: this.formBuilder.control('', [Validators.required])
-        }, { validator: OrderComponent_1.equalsTo });
+        }, { validators: [OrderComponent_1.equalsTo], updateOn: 'blur' });
     };
     OrderComponent.equalsTo = function (group) {
         var email = group.get('email');

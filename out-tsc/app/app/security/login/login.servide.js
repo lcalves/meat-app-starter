@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
-var LoginService = (function () {
+var LoginService = /** @class */ (function () {
     function LoginService(http, router) {
         var _this = this;
         this.http = http;
