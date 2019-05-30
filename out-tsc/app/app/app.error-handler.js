@@ -21,7 +21,10 @@ import { LoginService } from './security/login/login.servide';
 import { NotificationService } from './shared/messages/notification.service';
 import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import 'rxjs/add/observable/throw';
+//Mudou devido a versao 6 do rxjs
+// import 'rxjs/add/observable/throw'
+// SE FOSSE IMPORTAR SERIA UTILIZADO
+// import {throwError} from 'rxjs/operators'
 var ApplicationErrorHandler = /** @class */ (function (_super) {
     __extends(ApplicationErrorHandler, _super);
     function ApplicationErrorHandler(ns, injector, ngZone) {

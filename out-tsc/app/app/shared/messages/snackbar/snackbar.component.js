@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NotificationService } from '../notification.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/timer';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
+import { timer } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
+//Removido para uso da  versao 6 do rxjs
+// import 'rxjs/add/operator/do'
+// import 'rxjs/add/operator/switchMap'
+// import 'rxjs/add/observable/timer'
 var SnackbarComponent = /** @class */ (function () {
     function SnackbarComponent(notificationService) {
         this.notificationService = notificationService;
@@ -22,10 +24,11 @@ var SnackbarComponent = /** @class */ (function () {
     }
     SnackbarComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.notificationService.notifier.do(function (message) {
+        this.notificationService.notifier
+            .pipe(tap(function (message) {
             _this.message = message;
             _this.snackVisibility = 'visible';
-        }).switchMap(function (message) { return Observable.timer(3000); }).subscribe(function (time) { return _this.snackVisibility = 'hidden'; });
+        }), switchMap(function (message) { return timer(3000); })).subscribe(function (time) { return _this.snackVisibility = 'hidden'; });
     };
     SnackbarComponent = __decorate([
         Component({

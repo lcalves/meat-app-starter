@@ -11,13 +11,14 @@ import { FormBuilder } from '@angular/forms';
 import { Component } from '@angular/core';
 import { RestaurantsService } from './restaurants.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/from';
-import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/operator/switchMap'
+// import 'rxjs/add/operator/do' 
+// import 'rxjs/add/operator/debounceTime'
+// import 'rxjs/add/operator/distinctUntilChanged'
+// import 'rxjs/add/operator/catch'
+// import 'rxjs/add/observable/from'
+import { from } from 'rxjs';
+import { switchMap, debounceTime, distinctUntilChanged, catchError } from 'rxjs/operators';
 var RestaurantsComponent = /** @class */ (function () {
     function RestaurantsComponent(restaurantsService, formBuilder) {
         this.restaurantsService = restaurantsService;
@@ -31,14 +32,11 @@ var RestaurantsComponent = /** @class */ (function () {
             searchControl: this.searchControl
         });
         this.searchControl.valueChanges
-            .debounceTime(500)
-            .distinctUntilChanged()
-            .switchMap(function (searchTerm) {
+            .pipe(debounceTime(500), distinctUntilChanged(), switchMap(function (searchTerm) {
             return _this.restaurantsService
                 .restaurants(searchTerm)
-                .catch(function (error) { return Observable.from([]); });
-        })
-            .subscribe(function (restaurants) { return _this.restaurants = restaurants; });
+                .pipe(catchError(function (error) { return from([]); }));
+        })).subscribe(function (restaurants) { return _this.restaurants = restaurants; });
         this.restaurantsService.restaurants().subscribe(function (rest) { return _this.restaurants = rest; });
     };
     RestaurantsComponent.prototype.toggleSearch = function () {
